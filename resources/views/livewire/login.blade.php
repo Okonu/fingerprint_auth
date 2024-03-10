@@ -39,3 +39,27 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@laragear/webpass@1/dist/webpass.js" defer></script>
+
+<script>
+    import Webpass from "laragear-webpass"
+
+    document.addEventListener('livewire:load', function () {
+        if (Webpass.isUnsupported()) {
+            return alert("Your browser doesn't support WebAuthn.")
+        }
+        
+        // const { success } = await Webpass.attest("/webauthn/register/options", "/webauthn/register")
+        const { credential, success, error } = await Webpass.attest("/webauthn/register/options", "/webauthn/register")
+
+        const { user, success, error } = await Webpass.assert("/webauthn/login/options", "/webauthn/login")
+        
+        if (success) {
+            window.location.replace("/dashboard")
+        }
+    });
+
+
+</script>

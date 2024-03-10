@@ -4,6 +4,7 @@ use App\Livewire\Dashboard;
 use App\Livewire\Login;
 use App\Livewire\Logout;
 use App\Livewire\Register;
+use Laragear\WebAuthn\Http\Routes as WebAuthnRoutes;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/logout', Logout::class)->name('logout');
 });
+
+Route::view('/welcome', 'welcome');
+
+WebAuthnRoutes::register();
